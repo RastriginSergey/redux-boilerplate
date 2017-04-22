@@ -15,7 +15,7 @@ const Header = (props) => {
     return (
         <nav className="navbar navbar-default">
             <div className="container-fluid">
-                <ul className="nav nav-tabs">s
+                <ul className="nav nav-tabs">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/something-else">to something else</Link></li>
