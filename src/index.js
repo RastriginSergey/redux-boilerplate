@@ -5,16 +5,16 @@ import storeFactory from './store';
 // AppContainer is a necessary wrapper component for HMR
 import {AppContainer} from 'react-hot-loader';
 import App from './components/app';
+import T from './types';
 
-const initialState = (localStorage["redux-store"]) ?
-    JSON.parse(localStorage["redux-store"]) : {};
+const store = storeFactory();
+// store.subscribe(saveState);
 
-const saveState = () =>
-    localStorage["redux-store"] = JSON.stringify(store.getState());
+const token = localStorage.getItem('token');
 
-
-const store = storeFactory(initialState);
-store.subscribe(saveState);
+if (token) {
+    store.dispatch({type: T.AUTH_USER});
+}
 
 window.store = store;
 
