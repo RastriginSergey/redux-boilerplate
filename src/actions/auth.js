@@ -1,7 +1,7 @@
 import T from '../types';
 
-export const signin = (email, password) => (dispatch, getState) => {
-    dispatch({type: T.START_FETCHING});
+export const signin = ({email, password}, history) => (dispatch, getState) => {
+    const ROOT_URL = "http://localhost:3000";
 
     let options = {
         method: "POST",
@@ -11,30 +11,47 @@ export const signin = (email, password) => (dispatch, getState) => {
         },
     };
 
-    fetch("/signin", options)
+    fetch(`${ROOT_URL}/signin`, options)
         .then(response => response.json())
-        .then(({isAuthenticated, error}) => {
-            if (isAuthenticated) {
-                dispatch({type: T.SUCCESS_LOGIN});
-                dispatch({type: T.CANCEL_FETCHING});
-            } else {
-                dispatch({type: T.FAILURE_LOGIN, error});
-                dispatch({type: T.CANCEL_FETCHING});
+        .then(({token}) => {
+            if (token) {
+                localStorage.setItem('token', token);
+                dispatch({type: T.AUTH_USER});
+                history.push('/profile');
             }
         })
-        .catch(error => dispatch({type: T.FAILURE_LOGIN, error: error.message}))
+        .catch(error => dispatch({type: T.AUTH_ERROR, error: error.message}))
 };
 
-export const signup = (email, password) => (dispatch, getState) => {
-    dispatch({type: T.START_FETCHING});
+export const signup = ({email, password}) => (dispatch, getState) => {
+    const ROOT_URL = "http://localhost:3000";
+
+    let options = {
+        method: "POST",
+        body: JSON.stringify({email, password}),
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+
+    fetch(`${ROOT_URL}/signup`, options)
+        .then(response => response.json())
+        .then(({token, error}) => {
+            console.log(token, error)
+
+            if (token) {
+                localStorage.setItem('token', token);
+                dispatch({type: T.AUTH_USER});
+            } else if (error) {
+                dispatch({type: T.AUTH_ERROR, error: error})
+            }
+        })
+        .catch(error => dispatch({type: T.AUTH_ERROR, error: error.message}))
 };
 
 export const signout = () => (dispatch, getState) => {
-    dispatch({type: T.START_FETCHING});
-    fetch("/signout", {method: 'POST'})
-        .then(response => response.json())
-        .then(profile => {
-            dispatch({type: T.SUCCESS_LOGOUT});
-            dispatch({type: T.CANCEL_FETCHING});
-        }).catch(error => dispatch({type: T.FAILURE_LOGOUT, error: error.message}));
+    // delete token from localStorage
+    localStorage.removeItem('token');
+    // dispatch an action
+    dispatch({type: T.UNAUTH_USER});
 };

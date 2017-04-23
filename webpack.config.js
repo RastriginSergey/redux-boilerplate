@@ -15,7 +15,7 @@ module.exports = {
         // bundle the client for hot reloading
         // only- means to only hot reload for successful updates
 
-        './src/store.js'
+        './src/index.js'
     ],
     output: {
         filename: 'bundle.js',
@@ -26,7 +26,6 @@ module.exports = {
     devServer: {
         hot: true,
         // enable HMR on the server
-
         contentBase: path.resolve(__dirname, 'build'),
         // match the output path
     },
