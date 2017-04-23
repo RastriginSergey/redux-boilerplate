@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 const Header = (props) => {
     const auth_button = () => {
         if (props.user.isAuthenticated) {
-            return <li className="pull-right"><Link to="/logout">Logout</Link></li>
+            return <li className="pull-right"><Link to="/signout">Sign Out</Link></li>
         } else {
-            return <li className="pull-right"><Link to="/login">Login</Link></li>
+            return <li className="pull-right"><Link to="/signin">Sign In</Link></li>
         }
     };
 
@@ -19,7 +19,7 @@ const Header = (props) => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/something-else">to something else</Link></li>
-                    <li className="pull-right"><Link to="/register">Register</Link></li>
+                    <li className="pull-right"><Link to="/signup">Sign Up</Link></li>
                     {auth_button()}
                 </ul>
             </div>

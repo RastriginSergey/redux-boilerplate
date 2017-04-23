@@ -1,10 +1,10 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {logout} from '../../store/actions';
+import {signout} from '../../actions/auth';
 
-const Logout = (props) => {
+const Signout = (props) => {
     const onHandleClick = () => {
-        props.logout();
+        props.signout();
     }
 
     return (
@@ -12,4 +12,4 @@ const Logout = (props) => {
     )
 }
 
-export default connect(null, {logout})(Logout);
+export default connect(null, {signout})(Signout);

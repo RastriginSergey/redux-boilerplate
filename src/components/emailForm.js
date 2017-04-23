@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
-import {emailValidation} from './../validate';
+import {emailValidation} from '../validate';
 import React from 'react';
 import {Field} from 'redux-form';
 

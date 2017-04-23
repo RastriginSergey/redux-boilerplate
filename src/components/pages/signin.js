@@ -1,14 +1,14 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {login} from '../../store/actions';
+import {signin} from '../../actions/auth';
 
-const Login = (props) => {
+const Signin = (props) => {
     return (
         <div>
             <h2>Please Sign In</h2>
             <div className="form-group">
-                <input type="text" name="username" className="form-control input-lg" ref={(input) => {
-                    this.username = input;
+                <input type="text" name="email" className="form-control input-lg" ref={(input) => {
+                    this.email = input;
                 }}/>
             </div>
 
@@ -20,15 +20,15 @@ const Login = (props) => {
             <div className="row">
                 <div className="col-md-6">
                     <button className="btn btn-lg btn-success btn-block" onClick={() => {
-                        props.login(this.username.value, this.password.value);
+                        props.signin(this.email.value, this.password.value);
                     }}>Sign In
                     </button>
                 </div>
 
                 <div className="col-md-6">
                     <button className="btn btn-lg btn-primary btn-block" onClick={() => {
-                        props.history.push('/register')
-                    }}>Register
+                        props.history.push('/signup')
+                    }}>Sign Up
                     </button>
                 </div>
             </div>
@@ -37,4 +37,4 @@ const Login = (props) => {
 };
 
 
-export default connect(null, {login})(Login);
+export default connect(null, {signin})(Signin);

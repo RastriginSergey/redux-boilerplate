@@ -10,7 +10,7 @@ export default (ComposedComponent) => {
         componentWillMount() {
             const {isAuthenticated} = this.props.user;
             if(!isAuthenticated) {
-                this.props.history.push('/login');
+                this.props.history.push('/signin');
             }
         }
 

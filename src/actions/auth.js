@@ -1,17 +1,17 @@
-import T from './types';
+import T from '../types';
 
-export const login = (username, password) => (dispatch, getState) => {
+export const signin = (email, password) => (dispatch, getState) => {
     dispatch({type: T.START_FETCHING});
 
     let options = {
         method: "POST",
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({email, password}),
         headers: {
             "Content-Type": "application/json"
         },
     };
 
-    fetch("/auth/login", options)
+    fetch("/signin", options)
         .then(response => response.json())
         .then(({isAuthenticated, error}) => {
             if (isAuthenticated) {
@@ -25,13 +25,13 @@ export const login = (username, password) => (dispatch, getState) => {
         .catch(error => dispatch({type: T.FAILURE_LOGIN, error: error.message}))
 };
 
-export const register = (username, password) => (dispatch, getState) => {
+export const signup = (email, password) => (dispatch, getState) => {
     dispatch({type: T.START_FETCHING});
 };
 
-export const logout = () => (dispatch, getState) => {
+export const signout = () => (dispatch, getState) => {
     dispatch({type: T.START_FETCHING});
-    fetch("/auth/logout", {method: 'GET'})
+    fetch("/signout", {method: 'POST'})
         .then(response => response.json())
         .then(profile => {
             dispatch({type: T.SUCCESS_LOGOUT});
