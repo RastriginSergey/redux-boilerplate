@@ -1,7 +1,5 @@
 # redux-boilerplate
 -------
-
-### This is a greate redux boilerplate with bleeding edge technologies
-
-This project has a token jwt authentication, protected routes, hot reload config and ready to go.
+## This project has a token jwt authentication, protected routes, hot reload config and ready to go.
+### npm start for start webpack developer server
 
